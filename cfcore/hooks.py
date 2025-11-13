@@ -140,6 +140,15 @@ app_license = "gpl-3.0"
 # 	}
 # }
 
+doc_events = {
+	"Employee Checkin": {
+		"after_insert": "cfcore.timesheet.handlers.on_checkin_after_insert"
+	},
+	"Weekly Timesheet": {
+		"before_save": "cfcore.timesheet.handlers.before_wt_save"
+	}
+}
+
 # Scheduled Tasks
 # ---------------
 

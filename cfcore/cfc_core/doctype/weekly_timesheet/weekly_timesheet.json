@@ -1,0 +1,236 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:WT-{####}-{YYYY}-{MM}",
+ "creation": "2025-11-11 11:49:03.583514",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_info_section",
+  "employee",
+  "amended_from",
+  "column_break_afen",
+  "supervisor",
+  "time_section_section",
+  "from_date",
+  "days_worked",
+  "column_break_ekmq",
+  "to_date",
+  "hours_worked",
+  "days_section",
+  "days_table",
+  "expenses_section_section",
+  "expenses_detail",
+  "total_expenses",
+  "amount_secction_section",
+  "use_override",
+  "work_rate",
+  "calculated_amount",
+  "override_amount",
+  "total_amount",
+  "rate_details_tab",
+  "snapshot_rate_details_section",
+  "column_break_ahjm",
+  "rate_name",
+  "rate_mode",
+  "rate"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "employee_info_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Info"
+  },
+  {
+   "fieldname": "time_section_section",
+   "fieldtype": "Section Break",
+   "label": "Time Section"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "days_worked",
+   "fieldtype": "Float",
+   "label": "Days Worked",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ekmq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "hours_worked",
+   "fieldtype": "Data",
+   "label": "Hours Worked",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amount_secction_section",
+   "fieldtype": "Section Break",
+   "label": "Amount Section"
+  },
+  {
+   "default": "0",
+   "fieldname": "use_override",
+   "fieldtype": "Check",
+   "label": "Use Override"
+  },
+  {
+   "depends_on": "eval:doc.use_override===1",
+   "fieldname": "override_amount",
+   "fieldtype": "Currency",
+   "label": "Override amount"
+  },
+  {
+   "fieldname": "total_expenses",
+   "fieldtype": "Currency",
+   "label": "Total Expenses",
+   "read_only": 1
+  },
+  {
+   "fieldname": "expenses_section_section",
+   "fieldtype": "Section Break",
+   "label": "Expenses Section"
+  },
+  {
+   "fieldname": "days_section",
+   "fieldtype": "Section Break",
+   "label": "Days"
+  },
+  {
+   "fieldname": "days_table",
+   "fieldtype": "Table",
+   "label": "Days Table",
+   "options": "Workday Entry"
+  },
+  {
+   "fieldname": "expenses_detail",
+   "fieldtype": "Table",
+   "label": "Expenses Detail",
+   "options": "Expense Entry"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Weekly Timesheet",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "rate_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Rate Details"
+  },
+  {
+   "fieldname": "column_break_ahjm",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_afen",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "supervisor",
+   "fieldtype": "Link",
+   "label": "Supervisor",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "snapshot_rate_details_section",
+   "fieldtype": "Section Break",
+   "label": "Snapshot Rate Details"
+  },
+  {
+   "depends_on": "eval:doc.use_override===0",
+   "fieldname": "calculated_amount",
+   "fieldtype": "Currency",
+   "label": "Calculated Amount"
+  },
+  {
+   "depends_on": "eval:doc.use_override===0",
+   "fieldname": "work_rate",
+   "fieldtype": "Link",
+   "label": "Work Rate",
+   "options": "Work Rate"
+  },
+  {
+   "fieldname": "rate_name",
+   "fieldtype": "Data",
+   "label": "Rate Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rate_mode",
+   "fieldtype": "Data",
+   "label": "Rate Mode",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "label": "Rate",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-11-13 02:02:37.044215",
+ "modified_by": "Administrator",
+ "module": "CFC Core",
+ "name": "Weekly Timesheet",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
