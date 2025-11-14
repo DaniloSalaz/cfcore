@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:WT-{####}-{YYYY}-{MM}",
+ "autoname": "format:WT-{####}-{from_date}",
  "creation": "2025-11-11 11:49:03.583514",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -81,8 +81,9 @@
   },
   {
    "fieldname": "hours_worked",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "label": "Hours Worked",
+   "non_negative": 1,
    "read_only": 1
   },
   {
@@ -208,7 +209,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-11-13 02:02:37.044215",
+ "modified": "2025-11-14 02:29:56.733565",
  "modified_by": "Administrator",
  "module": "CFC Core",
  "name": "Weekly Timesheet",
