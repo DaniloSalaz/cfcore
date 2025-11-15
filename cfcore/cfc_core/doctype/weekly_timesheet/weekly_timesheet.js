@@ -23,11 +23,21 @@ frappe.ui.form.on("Weekly Timesheet", {
     frm.trigger("get_work_rate");
   },
 
+  work_rate(frm) {
+    frm.call('calculate_total_amount');
+  }
+
 });
 
 
 frappe.ui.form.on("Expense Entry", {
   amount(frm, cdt, cdn) {
     frm.set_value("total_expenses", frm.doc.expenses_detail.reduce((total, entry) => total + (entry.amount || 0), 0));
+  }
+})
+
+frappe.ui.form.on("Workday Entry", {
+  total_hours(frm, cdt, cdn) {
+    frm.call('calculate_total_amount')
   }
 })
