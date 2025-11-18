@@ -1,13 +1,14 @@
+from __future__ import unicode_literals
 from frappe import _
+
 
 def get_data():
     return [
         {
-            "module_name": "CF Core",
-            "category": "Modules",
-            "label": _("CF Core"),
-            "icon": "octicon octicon-organization",
+            "module_name": "My Application",
+            "color": "grey",
+            "icon": "octicon octicon-file-directory",
             "type": "module",
-            "color": "blue"
+            "label": _("My Application"),
         }
     ]
