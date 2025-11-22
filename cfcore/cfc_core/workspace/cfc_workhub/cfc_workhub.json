@@ -1,0 +1,75 @@
+{
+ "app": "cfcore",
+ "charts": [
+  {
+   "chart_name": "Weekly Expenses",
+   "label": "Weekly Expenses"
+  }
+ ],
+ "content": "[{\"id\":\"OWDdbnhXL8\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">CFC Dashboard</span>\",\"col\":12}},{\"id\":\"cDJFWjZlae\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Pending Weekly Timesheets\",\"col\":4}},{\"id\":\"hddTZPzyb1\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Paid Weekly Timesheets\",\"col\":4}},{\"id\":\"FgMWPByymu\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Approved Weekly Timesheets\",\"col\":4}},{\"id\":\"NsVKXvyMos\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Weekly Expenses\",\"col\":12}},{\"id\":\"tPAYWsoAEC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Weekly Timesheet\",\"col\":3}},{\"id\":\"CpnQf4EqKm\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"M6D77GMmfM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Work Rate\",\"col\":3}}]",
+ "creation": "2025-11-21 13:40:50.679144",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "bolt",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "CFC WorkHub",
+ "link_type": "DocType",
+ "links": [],
+ "modified": "2025-11-21 21:48:27.708519",
+ "modified_by": "Administrator",
+ "module": "CFC Core",
+ "name": "CFC WorkHub",
+ "number_cards": [
+  {
+   "label": "Pending Weekly Timesheets",
+   "number_card_name": "Pending Weekly Timesheets"
+  },
+  {
+   "label": "Paid Weekly Timesheets",
+   "number_card_name": "Paid Weekly Timesheets"
+  },
+  {
+   "label": "Approved Weekly Timesheets",
+   "number_card_name": "Approved Weekly Timesheets"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 29.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Weekly Timesheet",
+   "link_to": "Weekly Timesheet",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "label": "Employee",
+   "link_to": "Employee",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Pink",
+   "doc_view": "List",
+   "label": "Work Rate",
+   "link_to": "Work Rate",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "CFC WorkHub",
+ "type": "Workspace"
+}

@@ -146,7 +146,10 @@ doc_events = {
 	},
 	"Weekly Timesheet": {
 		"before_save": "cfcore.timesheet.handlers.before_wt_save"
-	}
+	},
+	"Employee": {
+    "after_insert": "cfcore.hr.employee_handler.ensure_default_shift_and_assign"
+  }
 }
 
 # Scheduled Tasks

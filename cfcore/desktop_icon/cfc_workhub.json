@@ -1,0 +1,20 @@
+{
+ "app": "cfcore",
+ "creation": "2025-11-21 17:51:12.001105",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon": "bolt",
+ "icon_type": "Link",
+ "idx": 0,
+ "label": "CFC WorkHub",
+ "link_to": "CFC WorkHub",
+ "link_type": "Workspace",
+ "modified": "2025-11-21 18:00:17.950328",
+ "modified_by": "Administrator",
+ "name": "CFC WorkHub",
+ "owner": "Administrator",
+ "roles": [],
+ "sidebar": "",
+ "standard": 1
+}

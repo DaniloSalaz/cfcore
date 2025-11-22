@@ -1,0 +1,31 @@
+{
+ "cards": [
+  {
+   "card": "Pending Weekly Timesheets"
+  },
+  {
+   "card": "Approved Weekly Timesheets"
+  },
+  {
+   "card": "Paid Weekly Timesheets"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Weekly Expenses",
+   "width": "Full"
+  }
+ ],
+ "creation": "2025-11-21 17:35:27.796339",
+ "dashboard_name": "CFC Dashboard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2025-11-21 17:49:28.389397",
+ "modified_by": "Administrator",
+ "module": "CFC Core",
+ "name": "CFC Dashboard",
+ "owner": "Administrator"
+}
