@@ -1,0 +1,71 @@
+{
+  "common": {
+    "cancel": "Cancelar",
+    "create": "Crear",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "logout": "Cerrar Sesión",
+    "close": "Cerrar"
+  },
+  "splash": {
+    "appName": "CFC Time"
+  },
+  "login": {
+    "title": "Iniciar sesión",
+    "email": "Correo",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "signIn": "Iniciar sesión",
+    "invalidCredentials": "Credenciales inválidas",
+    "enterValidEmail": "Por favor ingresa un correo válido"
+  },
+  "home": {
+    "title": "Inicio",
+    "notRegistered": "no_registrado",
+    "checkedIn": "Registrado",
+    "checkedOut": "Desregistrado",
+    "sync": "Sincronizar",
+    "checkInButton": "REGISTRASE",
+    "checkOutButton": "DESREGISTRARSE",
+    "requestCheckInOut": "Solicitar Registro",
+    "lastCheckIn": "Entrada",
+    "lastCheckOut": "Salida"
+  },
+  "records": {
+    "title": "Registros",
+    "timeRecords": "Registros de Tiempo",
+    "filters": "Filtros",
+    "startDate": "Fecha de Inicio",
+    "endDate": "Fecha de Fin",
+    "filter": "Filtrar",
+    "clear": "limpiar",
+    "downloadPDF": "Descargar PDF",
+    "checkedIn": "Registrado",
+    "checkedOut": "Desregistrado"
+  },
+  "expenses": {
+    "title": "Gastos",
+    "expenses": "Gastos",
+    "newExpense": "Nuevo Gasto",
+    "detail": "Detalle",
+    "enterDetail": "Ingresa el detalle",
+    "amount": "Cantidad",
+    "invoice": "Factura",
+    "pending": "pendiente",
+    "approved": "aprobado",
+    "rejected": "rechazado"
+  },
+  "profile": {
+    "title": "Perfil",
+    "profile": "Perfil",
+    "editProfile": "Editar perfil",
+    "changePassword": "Cambiar contraseña",
+    "darkMode": "Modo oscuro",
+    "selectLanguage": "Seleccionar idioma",
+    "deleteLocalData": "Eliminar datos locales",
+    "logout": "Cerrar Sesión",
+    "english": "English",
+    "spanish": "Español"
+  }
+}

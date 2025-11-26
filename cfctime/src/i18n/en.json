@@ -1,0 +1,73 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "create": "Create",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "logout": "Logout",
+    "close": "Close"
+  },
+  "splash": {
+    "appName": "CFC Time"
+  },
+  "login": {
+    "title": "Sign in",
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
+    "signIn": "Log In",
+    "invalidCredentials": "Invalid credentials",
+    "enterValidEmail": "Please enter a valid email"
+  },
+  "home": {
+    "title": "Home",
+    "notRegistered": "not_registered",
+    "checkedIn": "Checked in",
+    "checkedOut": "Checked out",
+    "sync": "Sync",
+    "checkInButton": "CHECK-IN",
+    "checkOutButton": "CHECK-OUT",
+    "requestCheckInOut": "Request Check-in/Check-out",
+    "checkIn": "Check in",
+    "checkOut": "Check out",
+    "lunchOut": "Lunch Out",
+    "lunchIn": "Lunch In"
+  },
+  "records": {
+    "title": "Records",
+    "timeRecords": "Time Records",
+    "filters": "Filters",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "filter": "Filter",
+    "clear": "clear",
+    "downloadPDF": "Download PDF",
+    "checkedIn": "Checked In",
+    "checkedOut": "Checked Out"
+  },
+  "expenses": {
+    "title": "Expenses",
+    "expenses": "Expenses",
+    "newExpense": "New Expense",
+    "detail": "Detail",
+    "enterDetail": "Enter detail",
+    "amount": "Amount",
+    "invoice": "Invoice",
+    "pending": "pending",
+    "approved": "approved",
+    "rejected": "rejected"
+  },
+  "profile": {
+    "title": "Profile",
+    "profile": "Profile",
+    "editProfile": "Edit profile",
+    "changePassword": "Change password",
+    "darkMode": "Dark mode",
+    "selectLanguage": "Select language",
+    "deleteLocalData": "Delete local data",
+    "logout": "Logout",
+    "english": "English",
+    "spanish": "Español"
+  }
+}
