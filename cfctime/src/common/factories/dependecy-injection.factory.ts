@@ -1,15 +1,15 @@
 import type { AppDependencies } from "../types/app-dependencies.interface";
-import { useFrappeCheckInRepository } from "@/features/checkin/infra/use-check-in.repository";
-import { useLocalCheckInRepository } from "@/features/checkin/infra/use-local-check-in.repository";
+import { LocalCheckinRepository } from "@/features/checkin/infra/local-check-in.repository";
 import { NetworkStatusService } from "../infra/network-status.service";
 import { SubmitCheckInUseCase } from "@/features/checkin/application/submit-checkIn.usecase";
 import { GetTodaysCheckinsUseCase } from "@/features/checkin/application/get-todays-checkins.usecase";
 import { SyncCheckinsUseCase } from "@/features/checkin/application/sync-checkins.usecase";
 import { getDatabaseInstance } from './database.factory';
+import { FrappeCheckInRepository } from "@/features/checkin/infra/frappe-checkin";
 
 export const buildDependencies = (): AppDependencies => {
-  const checkinRepository = useFrappeCheckInRepository();
-  const localCheckinRepository = useLocalCheckInRepository();
+  const checkinRepository = new FrappeCheckInRepository();
+  const localCheckinRepository = new LocalCheckinRepository();
   const networkStatusService = new NetworkStatusService();
   const database = getDatabaseInstance();
 

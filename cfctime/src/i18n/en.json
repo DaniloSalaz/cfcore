@@ -22,9 +22,10 @@
   },
   "home": {
     "title": "Home",
-    "notRegistered": "not_registered",
-    "checkedIn": "Checked in",
-    "checkedOut": "Checked out",
+    "notRegistered": "Not registered",
+    "working": "Working",
+    "lunchBreak": "Lunch break",
+    "finished": "Finished",
     "sync": "Sync",
     "checkInButton": "CHECK-IN",
     "checkOutButton": "CHECK-OUT",

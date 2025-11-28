@@ -22,9 +22,10 @@
   },
   "home": {
     "title": "Inicio",
-    "notRegistered": "no_registrado",
-    "checkedIn": "Registrado",
-    "checkedOut": "Desregistrado",
+    "notRegistered": "No registrado",
+    "working": "Trabajando",
+    "lunchBreak": "Almuerzo",
+    "finished": "Finalizado",
     "sync": "Sincronizar",
     "checkInButton": "REGISTRASE",
     "checkOutButton": "DESREGISTRARSE",
