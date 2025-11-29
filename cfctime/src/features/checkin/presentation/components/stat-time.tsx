@@ -2,9 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { useI18n } from '@/i18n';
 import { Clock, Coffee, Utensils } from 'lucide-react';
-
-
-type StatusKey = "IN" | "OUT" | "LUNCH_OUT" | "LUNCH_IN";
+import type { StatusKey } from '../types';
 
 interface StatTimeProps {
   time: string
@@ -13,10 +11,11 @@ interface StatTimeProps {
 
 
 const STAT_ICON: Record<StatusKey, JSX.Element> = {
+  EMPTY: <Clock size={20} />,
   IN: <Clock size={20} />,
-  OUT: <Clock size={20} />,
-  LUNCH_OUT: <Utensils size={20} />,
-  LUNCH_IN: <Coffee size={20} />
+  'IN-OUT': <Coffee size={20} />,
+  'IN-OUT-IN': <Coffee size={20} />,
+  'IN-OUT-IN-OUT': <Clock size={20} />,
 };
 
 const STAT_I18N = (t: (k: string) => string): Record<StatusKey, string> => ({
@@ -26,7 +25,7 @@ const STAT_I18N = (t: (k: string) => string): Record<StatusKey, string> => ({
   LUNCH_IN: t('home.lunchIn')
 });
 
-const StatTime: React.FC<AppointmentCalendarProps> = ({time, type}) => {
+const StatTime: React.FC<StatTimeProps> = ({time, type}) => {
   const { t } = useI18n();
   const label = STAT_I18N(t);
   const timeDisplay = time ? moment(time).format('LT') : '--:--';

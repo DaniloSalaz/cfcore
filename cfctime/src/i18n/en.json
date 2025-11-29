@@ -33,7 +33,14 @@
     "checkIn": "Check in",
     "checkOut": "Check out",
     "lunchOut": "Lunch Out",
-    "lunchIn": "Lunch In"
+    "lunchIn": "Lunch In",
+    "unsync": "Unsynced",
+    "checkInSuccess": "Check-in successful",
+    "checkOutSuccess": "Check-out successful",
+    "checkInError": "Error during check-in. Please try again.",
+    "checkOutError": "Error during check-out. Please try again.",
+    "locationError": "Unable to retrieve location. Please ensure location services are enabled."
+    
   },
   "records": {
     "title": "Records",

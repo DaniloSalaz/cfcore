@@ -3,13 +3,8 @@ import { useDependenciesInjection } from "@/common/providers/dependency-injectio
 import { useEffect, useMemo, useState } from "react";
 import type { EmployeeCheckIn, LogType } from "../../domain/employee-check-in";
 import moment from 'moment';
-
-type StatusKey =
-  | 'EMPTY'
-  | 'IN'
-  | 'IN-OUT'
-  | 'IN-OUT-IN'
-  | 'IN-OUT-IN-OUT';
+import type { StatusKey } from "../types";
+import { toast } from "sonner";
 
 const STATUS_LABEL = (t: (key: string) => string): Record<StatusKey, string> => ({
   EMPTY: t('home.notRegistered'),
@@ -25,6 +20,14 @@ const STATUS_COLORS: Record<StatusKey, string> = {
   'IN-OUT': 'green',
   'IN-OUT-IN': 'orange',
   'IN-OUT-IN-OUT': 'gray',
+};
+
+const NEXT_LOG_TYPE: Record<StatusKey, LogType | null> = {
+  EMPTY: 'IN',
+  IN: 'OUT',
+  'IN-OUT': 'IN',
+  'IN-OUT-IN': 'OUT',
+  'IN-OUT-IN-OUT': null,
 };
 
 const BUTTON_LABELS = (t: (key: string) => string): Record<StatusKey, string> => ({
@@ -46,8 +49,13 @@ export function useHomePage() {
 
   const statusLabels = useMemo(() => STATUS_LABEL(t), [t]);
   const buttonLabels = useMemo(() => BUTTON_LABELS(t), [t]);
-  const { getTodaysCheckinsUseCase, localCheckinRepository } = useDependenciesInjection();
+  const { getTodaysCheckinsUseCase, localCheckinRepository, submitCheckInUseCase } = useDependenciesInjection();
 
+  const calculateStatusKey = (logs: EmployeeCheckIn[]): StatusKey => {
+    const statusString = logs.map((item) => item.logType === 'IN' ? 'IN' : 'OUT').join('-') || 'EMPTY';
+    const validStatusKeys: StatusKey[] = ['EMPTY', 'IN', 'IN-OUT', 'IN-OUT-IN', 'IN-OUT-IN-OUT'];
+    return validStatusKeys.includes(statusString as StatusKey) ? statusString as StatusKey : 'EMPTY';
+  }
   const getStatus = () => {
     return statusLabels[keyStatus];
   }
@@ -66,6 +74,30 @@ export function useHomePage() {
     `;
   };
 
+  const handleCreateCheckIn = () => {
+    if(!NEXT_LOG_TYPE[keyStatus]) return;
+
+    const payload = {
+      logType: NEXT_LOG_TYPE[keyStatus]!,
+      time: moment().format('YYYY-MM-DDTHH:mm:ss'),
+    };
+    submitCheckInUseCase.execute(payload)
+      .then((result) => {
+        if(result.ok) {
+          // Update local state
+          setCheckInlogs((prev) => [...prev, result.value]);
+          setLastLog(result.value.logType);
+          setKeyStatus(calculateStatusKey([...checkInLogs, result.value]));
+          toast.success(t('home.' + (result.value.logType === 'IN' ? 'checkInSuccess' : 'checkOutSuccess')));
+        }else {
+          const message = result.error?.message || t('home.' + (payload.logType === 'IN' ? 'checkInError' : 'checkOutError'));
+          console.log('Error checkin:', message);
+          toast.error(message);
+        }
+        
+      });
+  }
+
   useEffect(() => {
     console.log('Entro')
     localCheckinRepository.getAllUnsynced()
@@ -75,9 +107,7 @@ export function useHomePage() {
       .then((result) => result.ok ? result.value : [])
       .then((items) => setCheckInlogs(items));
     setLastLog(checkInLogs.at(-1)?.logType);
-    const statusString = checkInLogs.map((item) => item.logType === 'IN' ? 'IN' : 'OUT').join('-') || 'EMPTY';
-    const validStatusKeys: StatusKey[] = ['EMPTY', 'IN', 'IN-OUT', 'IN-OUT-IN', 'IN-OUT-IN-OUT'];
-    setKeyStatus(validStatusKeys.includes(statusString as StatusKey) ? statusString as StatusKey : 'EMPTY');
+    setKeyStatus(calculateStatusKey(checkInLogs));
   }, []);
 
     // Clock ticker
@@ -92,8 +122,10 @@ export function useHomePage() {
     lastLog,
     checkInLogs,
     currentTime,
+    keyStatus,
     getStatus,
     getButtonLabel,
     getButtonColor,
+    handleCreateCheckIn,
   }
 }

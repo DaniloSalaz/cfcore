@@ -4,6 +4,7 @@ import type { CheckinCreatePayload, ICheckInRespository } from "../domain/checki
 import type { EmployeeCheckIn } from "../domain/employee-check-in";
 import { getFrappeInstance } from "@/common/factories/frappe.factory";
 import moment from 'moment';
+import { CheckInError } from "../domain/checkin-error";
 
 
 const DOCTYPE_EMPLOYEE_CHECKIN = 'Employee Checkin';
@@ -41,7 +42,9 @@ export class FrappeCheckInRepository implements ICheckInRespository {
       })
       .catch((error) => {
         console.error('Error creating check-in:', error);
-        return Err(error as Error);
+        const exception = error?.exception;
+        const message = !!exception ? exception.split(': ')[1] : 'Failed to create check-in';
+        return Err(new CheckInError('CHECKIN_CREATE_FAILED', message));
       });
   }
   syncBatch(inputs: CheckinCreatePayload[]): Promise<Result<void, Error>> {

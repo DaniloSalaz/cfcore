@@ -2,7 +2,6 @@ import type { Result, Option } from '@/common/domain/result'
 import type { EmployeeCheckIn, LogType } from './employee-check-in'
 
 export interface CheckinCreatePayload {
-  employee: string;
   logType: LogType;
   latitude?: number;
   longitude?: number;

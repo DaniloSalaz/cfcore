@@ -10,9 +10,12 @@ export function HomePage() {
     isSync,
     lastLog,
     currentTime,
+    checkInLogs,
+    keyStatus,
     getStatus,
     getButtonLabel,
     getButtonColor,
+    handleCreateCheckIn,
   } = useHomePage();
 
   return (
@@ -26,10 +29,7 @@ export function HomePage() {
           )} />
           <span className="text-sm font-medium text-gray-600 dark:text-gray-300">{getStatus()}</span>
         </div>
-        <div className={clsx(
-          'flex flex-col items-center', isSync ? 'text-green-500' : 'text-gray-500'
-        )
-        }>
+        <div className={clsx('flex flex-col items-center', isSync ? 'text-green-500' : 'text-gray-500')}>
             <Cloud size={24} />
             <span className="text-[10px] font-bold uppercase">{isSync ? t('home.sync') : t('home,unsync')}</span>
         </div>
@@ -48,7 +48,7 @@ export function HomePage() {
       {/* Main Button */}
       <div className="flex-1 flex flex-col items-center justify-center my-6">
         <button
-          // onClick={handleMainButton}
+          onClick={handleCreateCheckIn}
           // disabled={loading}
           className={clsx(
             "w-64 h-64 rounded-full border-4 flex items-center justify-center shadow-xl transition-all transform active:scale-95 bg-white dark:bg-gray-800",
@@ -69,10 +69,15 @@ export function HomePage() {
       {/* Stats Grid */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         {/* Check In */}
-        <StatTime  type={'IN'}/>
-        <StatTime time={moment()} type={'IN'}/>
-        <StatTime time={moment()} type={'IN'}/>
-        <StatTime time={moment()} type={'IN'}/>
+        {checkInLogs && 
+          checkInLogs.map((log, index) => (
+            <StatTime 
+              key={index}
+              time={log.time} 
+              type={keyStatus} 
+            />
+          ))
+        }
       </div>
 
       <button 
