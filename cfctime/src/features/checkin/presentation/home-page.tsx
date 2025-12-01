@@ -1,9 +1,7 @@
-import { Cloud, MapPin, Clock, MinusCircle, Coffee, Utensils } from 'lucide-react';
+import { Cloud, MapPin, MinusCircle } from 'lucide-react';
 import clsx from 'clsx';
-import moment from 'moment';
 import  StatTime from './components/stat-time'
 import { useHomePage } from './hooks/use-home-page';
-
 export function HomePage() {
   const {
     t,

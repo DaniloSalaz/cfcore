@@ -1,15 +1,15 @@
 import { type Result, Ok, Err } from '@/common/domain/result'
 import type { INetworkStatusService } from '@/common/domain/network-status.interface'
-import type { ICheckInRespository, ICheckInLocalRespository } from '../domain/checkin-repository.interface'
+import type { ICheckInRepository, ICheckInLocalRepository } from '../domain/checkin-repository'
 
 export class SyncCheckinsUseCase {
-  private repository: ICheckInRespository
-  private localRepository: ICheckInLocalRespository
+  private repository: ICheckInRepository
+  private localRepository: ICheckInLocalRepository
   private networkStatusService: INetworkStatusService
 
   constructor(
-    repository: ICheckInRespository,
-    localRepository: ICheckInLocalRespository,
+    repository: ICheckInRepository,
+    localRepository: ICheckInLocalRepository,
     networkStatusService: INetworkStatusService,
   ) {
     this.repository = repository
@@ -25,7 +25,7 @@ export class SyncCheckinsUseCase {
         const syncResult = await this.repository.syncBatch(
           localCheckInsResult.value.map(checkin => ({
             employee: checkin.employee,
-            logType: checkin.logType,
+            log_type: checkin.log_type,
             latitude: checkin.latitude,
             longitude: checkin.longitude,
             time: checkin.time,

@@ -2,19 +2,20 @@ import type { Result, Option } from '@/common/domain/result'
 import type { EmployeeCheckIn, LogType } from './employee-check-in'
 
 export interface CheckinCreatePayload {
-  logType: LogType;
+  employee: string;
+  log_type: LogType;
   latitude?: number;
   longitude?: number;
   time?: string;
 }
 
-export interface ICheckInRespository {
+export interface ICheckInRepository {
   getAllToday(): Promise<Result<EmployeeCheckIn[], Error>>;
   create(input: CheckinCreatePayload): Promise<Result<EmployeeCheckIn, Error>>;
   syncBatch(inputs: CheckinCreatePayload[]): Promise<Result<void, Error>>;
 }
 
-export interface ICheckInLocalRespository {
+export interface ICheckInLocalRepository {
   getAll(): Promise<Result<EmployeeCheckIn[], Error>>;
   getAllUnsynced(): Promise<Result<EmployeeCheckIn[], Error>>;
   getSyncedByTime(timestamp: string): Promise<Result<Option<EmployeeCheckIn>, Error>>;

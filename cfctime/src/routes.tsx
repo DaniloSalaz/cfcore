@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { SplashPage } from "@/common/pages/splash-page";
-import { LoginPage } from "@/features/auth/login-page";
+import { LoginPage } from "@/features/auth/presentation/login-page";
 import { HomePage } from "@/features/checkin/presentation/home-page";
 
 export const AppRoutes = () => {

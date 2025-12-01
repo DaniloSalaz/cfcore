@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { type JSX } from 'react';
 import moment from 'moment';
 import { useI18n } from '@/i18n';
-import { Clock, Coffee, Utensils } from 'lucide-react';
+import { Clock, Coffee } from 'lucide-react';
 import type { StatusKey } from '../types';
 
 interface StatTimeProps {
@@ -19,10 +19,11 @@ const STAT_ICON: Record<StatusKey, JSX.Element> = {
 };
 
 const STAT_I18N = (t: (k: string) => string): Record<StatusKey, string> => ({
+  EMPTY: t('home.notRegistered'),
   IN: t('home.checkIn'),
-  OUT: t('home.checkOut'),
-  LUNCH_OUT: t('home.lunchOut'),
-  LUNCH_IN: t('home.lunchIn')
+  'IN-OUT': t('home.checkOut'),
+  'IN-OUT-IN': t('home.lunchOut'),
+  'IN-OUT-IN-OUT': t('home.lunchIn')
 });
 
 const StatTime: React.FC<StatTimeProps> = ({time, type}) => {

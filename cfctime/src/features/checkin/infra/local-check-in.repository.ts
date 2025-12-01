@@ -1,10 +1,10 @@
 import { type Result, type Option , Ok, Err} from "@/common/domain/result";
 import type { EmployeeCheckIn } from "../domain/employee-check-in";
-import type { CheckinCreatePayload, ICheckInLocalRespository } from "../domain/checkin-repository.interface";
+import type { CheckinCreatePayload, ICheckInLocalRepository } from "../domain/checkin-repository";
 import { getDatabaseInstance, type EmployeeCheckInDB } from "@/common/factories/database.factory";
 
 
-export class LocalCheckinRepository implements ICheckInLocalRespository {
+export class LocalCheckinRepository implements ICheckInLocalRepository {
   private db;
   constructor() {
     this.db = getDatabaseInstance();

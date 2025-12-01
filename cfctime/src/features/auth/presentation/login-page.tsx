@@ -1,7 +1,12 @@
 import { Timer } from "lucide-react"
-import { LoginForm } from "@/common/components/login-form"
+import { LoginForm } from "@/features/auth/presentation/components/login-form"
+import { FormProvider } from "react-hook-form";
+import { useLoginPage } from "./hooks/use-login-page";
+
 
 export function LoginPage() {
+  const { form, onSubmit } = useLoginPage();
+
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
       <div className="flex w-full max-w-sm flex-col gap-6">
@@ -11,7 +16,13 @@ export function LoginPage() {
           </div>
           CFC Time.
         </a>
-        <LoginForm />
+        <FormProvider  {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+             <LoginForm />  
+          </form>
+         
+        </FormProvider>
+        
       </div>
     </div>
   )

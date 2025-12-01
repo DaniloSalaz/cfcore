@@ -1,16 +1,16 @@
 import type { Result } from '@/common/domain/result'
 import type { EmployeeCheckIn } from '../domain/employee-check-in'
 import type { INetworkStatusService } from '@/common/domain/network-status.interface'
-import type { ICheckInRespository, ICheckInLocalRespository, CheckinCreatePayload } from '../domain/checkin-repository.interface'
+import type { ICheckInRepository, ICheckInLocalRepository, CheckinCreatePayload } from '../domain/checkin-repository'
 
 export class GetTodaysCheckinsUseCase {
-  private repository: ICheckInRespository;
-  private localRepository: ICheckInLocalRespository;
+  private repository: ICheckInRepository;
+  private localRepository: ICheckInLocalRepository;
   private networkStatusService: INetworkStatusService;
 
   constructor(
-    repository: ICheckInRespository,
-    localRepository: ICheckInLocalRespository,
+    repository: ICheckInRepository,
+    localRepository: ICheckInLocalRepository,
     networkStatusService: INetworkStatusService,
   ) {
     this.repository = repository;

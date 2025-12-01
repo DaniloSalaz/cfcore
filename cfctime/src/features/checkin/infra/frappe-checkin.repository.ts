@@ -1,6 +1,6 @@
 import { type Result, Err, Ok } from "@/common/domain/result";
 import { FrappeApp } from 'frappe-js-sdk';
-import type { CheckinCreatePayload, ICheckInRespository } from "../domain/checkin-repository.interface";
+import type { CheckinCreatePayload, ICheckInRepository } from "../domain/checkin-repository";
 import type { EmployeeCheckIn } from "../domain/employee-check-in";
 import { getFrappeInstance } from "@/common/factories/frappe.factory";
 import moment from 'moment';
@@ -10,7 +10,7 @@ import { CheckInError } from "../domain/checkin-error";
 const DOCTYPE_EMPLOYEE_CHECKIN = 'Employee Checkin';
 
 
-export class FrappeCheckInRepository implements ICheckInRespository {
+export class FrappeCheckInRepository implements ICheckInRepository {
   private frappeApp: FrappeApp;
 
   constructor() {
@@ -31,19 +31,28 @@ export class FrappeCheckInRepository implements ICheckInRespository {
     })
     .catch((error) => {
       console.error('Error fetching today\'s check-ins:', error);
-      return Err(error as Error);
+      const exception = error?.message as string | undefined;
+      const message = !!exception ? exception: 'Failed to fetch today\'s check-ins';
+      return Err(new CheckInError('CHECKIN_FETCH_FAILED', message));
     });
 
   }
   create(input: CheckinCreatePayload): Promise<Result<EmployeeCheckIn, Error>> {
     return this.frappeApp.db().createDoc(DOCTYPE_EMPLOYEE_CHECKIN, input)
       .then((createdDoc) => {
-        return Ok(createdDoc as EmployeeCheckIn);
+        const employeeCheckIn: EmployeeCheckIn = {
+          employee: createdDoc.employee,
+          log_type: createdDoc.log_type,
+          time: createdDoc.time || '',
+          latitude: createdDoc.latitude,
+          longitude: createdDoc.longitude,
+        };
+        return Ok(employeeCheckIn);
       })
       .catch((error) => {
         console.error('Error creating check-in:', error);
-        const exception = error?.exception;
-        const message = !!exception ? exception.split(': ')[1] : 'Failed to create check-in';
+        const exception = error?.message as string | undefined;
+        const message = !!exception ? exception: 'Failed to create check-in';
         return Err(new CheckInError('CHECKIN_CREATE_FAILED', message));
       });
   }
