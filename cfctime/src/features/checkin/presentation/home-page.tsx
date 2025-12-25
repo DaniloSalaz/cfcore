@@ -2,6 +2,7 @@ import { Cloud, MapPin, MinusCircle } from 'lucide-react';
 import clsx from 'clsx';
 import  StatTime from './components/stat-time'
 import { useHomePage } from './hooks/use-home-page';
+import { useGeolocation } from './hooks/use-location';
 export function HomePage() {
   const {
     t,
@@ -15,6 +16,9 @@ export function HomePage() {
     getButtonColor,
     handleCreateCheckIn,
   } = useHomePage();
+
+  const { address, error } = useGeolocation();
+  console.log('Current Position:', address, 'Error:', error);
 
   return (
    <div className="flex flex-col h-full px-6 pt-8 pb-4 overflow-y-auto">

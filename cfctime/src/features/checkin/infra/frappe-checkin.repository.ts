@@ -16,6 +16,20 @@ export class FrappeCheckInRepository implements ICheckInRepository {
   constructor() {
     this.frappeApp = getFrappeInstance();
   }
+  async getGeoReverse(lat: number, lon: number): Promise<Result<string, Error>> {
+    return this.frappeApp.call()
+      .get<string>('cfcore.geo_reverse_cache.test_get_address', { lat: 10.10, lon:10.10 })
+      .then((response) => {
+        return Ok(response)
+      })
+      .catch((error) => {
+      console.error('Error Get address by lat lon', error);
+      const exception = error?.message as string | undefined;
+      const message = !!exception ? exception: 'Failed to get address';
+      return Err(new CheckInError('GEO_REVERSE_FAILED', message));
+    });
+  }
+
   async getAllToday(): Promise<Result<EmployeeCheckIn[], Error>> {
     const formattedStartDate = moment().startOf('day').format('YYYY-MM-DD HH:mm:ss');
     const formattedEndDate = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss');

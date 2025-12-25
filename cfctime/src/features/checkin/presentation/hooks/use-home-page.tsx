@@ -1,43 +1,49 @@
 import { useI18n } from "@/i18n";
 import { useDependenciesInjection } from "@/common/providers/dependency-injection-provider";
 import { useEffect, useMemo, useState } from "react";
-import type { EmployeeCheckIn, LogType } from "../../domain/employee-check-in";
-import moment from 'moment';
-import type { StatusKey } from "../types";
+import type {
+  EmployeeCheckIn,
+  LogType,
+  StatusKey,
+} from "../../domain/employee-check-in";
+import moment from "moment";
 import { toast } from "sonner";
 
-const STATUS_LABEL = (t: (key: string) => string): Record<StatusKey, string> => ({
-  EMPTY: t('home.notRegistered'),
-  IN: t('home.working'),
-  'IN-OUT': t('home.lunchBreak'),
-  'IN-OUT-IN': t('home.working'),
-  'IN-OUT-IN-OUT': t('home.finished'),
+const STATUS_LABEL = (
+  t: (key: string) => string
+): Record<StatusKey, string> => ({
+  EMPTY: t("home.notRegistered"),
+  IN: t("home.working"),
+  "IN-OUT": t("home.lunchBreak"),
+  "IN-OUT-IN": t("home.working"),
+  "IN-OUT-IN-OUT": t("home.finished"),
 });
 
 const STATUS_COLORS: Record<StatusKey, string> = {
-  EMPTY: 'blue',
-  IN: 'orange',
-  'IN-OUT': 'green',
-  'IN-OUT-IN': 'orange',
-  'IN-OUT-IN-OUT': 'gray',
+  EMPTY: "blue",
+  IN: "orange",
+  "IN-OUT": "green",
+  "IN-OUT-IN": "orange",
+  "IN-OUT-IN-OUT": "gray",
 };
 
 const NEXT_LOG_TYPE: Record<StatusKey, LogType | null> = {
-  EMPTY: 'IN',
-  IN: 'OUT',
-  'IN-OUT': 'IN',
-  'IN-OUT-IN': 'OUT',
-  'IN-OUT-IN-OUT': null,
+  EMPTY: "IN",
+  IN: "OUT",
+  "IN-OUT": "IN",
+  "IN-OUT-IN": "OUT",
+  "IN-OUT-IN-OUT": null,
 };
 
-const BUTTON_LABELS = (t: (key: string) => string): Record<StatusKey, string> => ({
-  EMPTY: t('home.checkIn'),
-  IN: t('home.lunchOut'),
-  'IN-OUT': t('home.lunchIn'),
-  'IN-OUT-IN': t('home.checkOut'),
-  'IN-OUT-IN-OUT': t('home.finished'),
+const BUTTON_LABELS = (
+  t: (key: string) => string
+): Record<StatusKey, string> => ({
+  EMPTY: t("home.checkIn"),
+  IN: t("home.lunchOut"),
+  "IN-OUT": t("home.lunchIn"),
+  "IN-OUT-IN": t("home.checkOut"),
+  "IN-OUT-IN-OUT": t("home.finished"),
 });
-  
 
 export function useHomePage() {
   const { t } = useI18n();
@@ -45,24 +51,24 @@ export function useHomePage() {
   const [lastLog, setLastLog] = useState<LogType>();
   const [checkInLogs, setCheckInLogs] = useState<EmployeeCheckIn[]>([]);
   const [currentTime, setCurrentTime] = useState(moment());
-  const [keyStatus, setKeyStatus] = useState<StatusKey>('EMPTY');
+  const [keyStatus, setKeyStatus] = useState<StatusKey>("EMPTY");
 
   const statusLabels = useMemo(() => STATUS_LABEL(t), [t]);
   const buttonLabels = useMemo(() => BUTTON_LABELS(t), [t]);
-  const { getTodaysCheckinsUseCase, localCheckinRepository, submitCheckInUseCase  } = useDependenciesInjection();
+  const {
+    getTodaysCheckinsUseCase,
+    hasUnsyncedCheckinsUseCase,
+    submitCheckInUseCase,
+    getStatusDayUseCase,
+  } = useDependenciesInjection();
 
-  const calculateStatusKey = (logs: EmployeeCheckIn[]): StatusKey => {
-    const statusString = logs.map((item) => item.log_type === 'IN' ? 'IN' : 'OUT').join('-') || 'EMPTY';
-    const validStatusKeys: StatusKey[] = ['EMPTY', 'IN', 'IN-OUT', 'IN-OUT-IN', 'IN-OUT-IN-OUT'];
-    return validStatusKeys.includes(statusString as StatusKey) ? statusString as StatusKey : 'EMPTY';
-  }
   const getStatus = () => {
     return statusLabels[keyStatus];
-  }
+  };
 
   const getButtonLabel = () => {
     return buttonLabels[keyStatus];
-  }
+  };
 
   const getButtonColor = () => {
     const c = STATUS_COLORS[keyStatus];
@@ -75,45 +81,67 @@ export function useHomePage() {
   };
 
   const handleCreateCheckIn = () => {
-    if(!NEXT_LOG_TYPE[keyStatus]) return;
+    if (!NEXT_LOG_TYPE[keyStatus]) return;
 
     const payload = {
       log_type: NEXT_LOG_TYPE[keyStatus]!,
-      time: moment().format('YYYY-MM-DDTHH:mm:ss'),
+      time: moment().format("YYYY-MM-DDTHH:mm:ss"),
       latitude: 34.5515685,
       longitude: -77.3853221,
     };
 
-    submitCheckInUseCase.execute(payload)
-      .then((result) => {
-        if(result.ok) {
-          setCheckInLogs((prev) => [...prev, result.value]);
-          setLastLog(result.value.log_type);
-          setKeyStatus(calculateStatusKey([...checkInLogs, result.value]));
-          toast.success(t('home.' + (result.value.log_type === 'IN' ? 'checkInSuccess' : 'checkOutSuccess')), { style: { color: 'green' } });
-        }else {
-          const message = result.error?.message || t('home.' + (payload.log_type === 'IN' ? 'checkInError' : 'checkOutError'));
-          toast.error(message, { style: { color: 'red' } });
-        }
-        
-      });
-  }
+    submitCheckInUseCase.execute(payload).then((result) => {
+      if (result.ok) {
+        setCheckInLogs((prev) => [...prev, result.value]);
+        setLastLog(result.value.log_type);
+        toast.success(
+          t(
+            "home." +
+              (result.value.log_type === "IN"
+                ? "checkInSuccess"
+                : "checkOutSuccess")
+          ),
+          { style: { color: "green" } }
+        );
+      } else {
+        const message =
+          result.error?.message ||
+          t(
+            "home." +
+              (payload.log_type === "IN" ? "checkInError" : "checkOutError")
+          );
+        toast.error(message, { style: { color: "red" } });
+      }
+    });
+  };
 
   useEffect(() => {
-    localCheckinRepository.getAllUnsynced()
-      .then((result) => result.ok ? result.value.length : -1 )
-      .then((count) => setSync(count === 0));
-    getTodaysCheckinsUseCase.execute()
-      .then((result) => result.ok ? setCheckInLogs(result.value) : toast.error(result.error?.message || t('home.fetchCheckInsError'), { style: { color: 'red' } }))
+    getTodaysCheckinsUseCase
+      .execute()
+      .then((result) =>
+        result.ok
+          ? setCheckInLogs(result.value)
+          : toast.error(result.error?.message || t("home.fetchCheckInsError"), {
+              style: { color: "red" },
+            })
+      );
+  }, []);
+
+  useEffect(() => {
+    hasUnsyncedCheckinsUseCase
+      .execute()
+      .then((result) => result.ok && setSync(!result.value));
+    getStatusDayUseCase
+      .execute()
+      .then((result) => result.ok && setKeyStatus(result.value));
     setLastLog(checkInLogs.at(-1)?.log_type);
-    setKeyStatus(calculateStatusKey(checkInLogs));
-  }, []);
+  }, [checkInLogs]);
 
-    // Clock ticker
-  useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(moment()), 1000);
-    return () => clearInterval(timer);
-  }, []);
+  // Clock ticker
+  // useEffect(() => {
+  //   const timer = setInterval(() => setCurrentTime(moment()), 1000);
+  //   return () => clearInterval(timer);
+  // }, []);
 
   return {
     t,
@@ -126,5 +154,5 @@ export function useHomePage() {
     getButtonLabel,
     getButtonColor,
     handleCreateCheckIn,
-  }
+  };
 }

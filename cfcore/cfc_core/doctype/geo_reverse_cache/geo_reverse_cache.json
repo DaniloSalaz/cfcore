@@ -1,0 +1,95 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "UUID",
+ "creation": "2025-12-01 18:47:48.648527",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "latitude",
+  "longitude",
+  "hits",
+  "last_used_at",
+  "provider",
+  "column_break_afti",
+  "norm_longitude",
+  "norm_latitude",
+  "formatted_address"
+ ],
+ "fields": [
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Float",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Float",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "norm_latitude",
+   "fieldtype": "Float",
+   "label": "Norm Latitude",
+   "search_index": 1
+  },
+  {
+   "fieldname": "norm_longitude",
+   "fieldtype": "Float",
+   "label": "Norm Longitude",
+   "search_index": 1
+  },
+  {
+   "fieldname": "provider",
+   "fieldtype": "Data",
+   "label": "Provider"
+  },
+  {
+   "fieldname": "formatted_address",
+   "fieldtype": "Small Text",
+   "label": "Formatted Address"
+  },
+  {
+   "fieldname": "hits",
+   "fieldtype": "Int",
+   "label": "Hits"
+  },
+  {
+   "fieldname": "last_used_at",
+   "fieldtype": "Datetime",
+   "label": "Last Used At"
+  },
+  {
+   "fieldname": "column_break_afti",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-01 19:32:55.152344",
+ "modified_by": "Administrator",
+ "module": "CFC Core",
+ "name": "Geo Reverse Cache",
+ "naming_rule": "UUID",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -11,6 +11,10 @@ import { LogoutUserUseCase } from "@/features/auth/application/logout-user.useca
 import { GetUserLoggedInUseCase } from "@/features/auth/application/get-user.usecase";
 import { LoginUserUseCase } from "@/features/auth/application/login-user.usecase";
 import { GetEmployeeUseCase } from "@/features/auth/application/get-employee.usecase";
+import { GetStatusByLogUseCase } from "@/features/checkin/application/get-status-by-log.usecase";
+import { GetStatusDayUseCase } from "@/features/checkin/application/get-status-day.usecase";
+import { HasUnsyncedCheckins } from "@/features/checkin/application/has-unsynced-checkins";
+import { GetGeoReverse } from "@/features/checkin/application/get-geo-reverse.usecase";
 
 export const buildDependencies = (): AppDependencies => {
   const checkinRepository = new FrappeCheckInRepository();
@@ -38,7 +42,11 @@ export const buildDependencies = (): AppDependencies => {
     networkStatusService,
   );
 
+  const getStatusDayUseCase = new GetStatusDayUseCase(checkinRepository);
+  const getGeoReverse = new GetGeoReverse(checkinRepository)
+  const getStatusByLogUseCase = new GetStatusByLogUseCase(checkinRepository);
   const getUserLoggedInUseCase = new GetUserLoggedInUseCase(userRepository);
+  const hasUnsyncedCheckinsUseCase = new HasUnsyncedCheckins(localCheckinRepository);
   const logoutUserUseCase = new LogoutUserUseCase(userRepository);
   const loginUserUseCase = new LoginUserUseCase(userRepository);
   const getEmployeeUseCase = new GetEmployeeUseCase(userRepository);
@@ -51,9 +59,13 @@ export const buildDependencies = (): AppDependencies => {
     networkStatusService,
     database,
     
+    getGeoReverse,
+    getStatusDayUseCase,
+    getStatusByLogUseCase,
     submitCheckInUseCase,
     getTodaysCheckinsUseCase,
     syncCheckinsUseCase,
+    hasUnsyncedCheckinsUseCase,
     getUserLoggedInUseCase,
     logoutUserUseCase,
     loginUserUseCase,

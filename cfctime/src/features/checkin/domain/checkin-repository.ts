@@ -13,6 +13,7 @@ export interface ICheckInRepository {
   getAllToday(): Promise<Result<EmployeeCheckIn[], Error>>;
   create(input: CheckinCreatePayload): Promise<Result<EmployeeCheckIn, Error>>;
   syncBatch(inputs: CheckinCreatePayload[]): Promise<Result<void, Error>>;
+  getGeoReverse(lat: number, lon: number): Promise<Result<string, Error>>;
 }
 
 export interface ICheckInLocalRepository {
