@@ -11,13 +11,13 @@ interface NavItem {
 export function BottomNav() {
   const { t } = useI18n();
   const location = useLocation();
-  const isLogoutPath = location.pathname === "/login";
+  const isLogoutPath = location.pathname === "cfctime/login";
 
   const navItems: NavItem[] = [
-    { path: "/home", label: t("home.title"), icon: <Home className="w-6 h-6" /> },
-    { path: "/records", label: t("records.title"), icon: <Calendar className="w-6 h-6" /> },
-    { path: "/expenses", label: t("expenses.title"), icon: <Wallet className="w-6 h-6" /> },
-    { path: "/profile", label: t("profile.title"), icon: <User className="w-6 h-6" /> },
+    { path: "cfctime/home", label: t("home.title"), icon: <Home className="w-6 h-6" /> },
+    { path: "cfctime/records", label: t("records.title"), icon: <Calendar className="w-6 h-6" /> },
+    { path: "cfctime/expenses", label: t("expenses.title"), icon: <Wallet className="w-6 h-6" /> },
+    { path: "cfctime/profile", label: t("profile.title"), icon: <User className="w-6 h-6" /> },
   ];
 
   // if (isLogoutPath) {

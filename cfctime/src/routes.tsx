@@ -7,9 +7,12 @@ export const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<SplashPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/home" element={<HomePage />} />
+      <Route path="cfctime">
+        <Route index element={<SplashPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="home" element={<HomePage />} />
+      </Route>
+      
     </Routes>
   );
 };
